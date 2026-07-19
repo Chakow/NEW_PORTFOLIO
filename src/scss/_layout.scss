@@ -1,0 +1,44 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid $text-color;
+  padding: 1.5rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+  }
+
+  nav {
+    a {
+      color: $text-color;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      margin-left: 1.5rem;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        text-decoration: underline; /* Souligné brut au survol */
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    nav a {
+      margin-left: 0;
+      margin-right: 1.5rem;
+    }
+  }
+}

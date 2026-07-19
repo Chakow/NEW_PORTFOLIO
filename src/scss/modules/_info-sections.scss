@@ -1,0 +1,130 @@
+/* GESTION DES PAGES INDÉPENDANTES */
+.main-content {
+  width: 100%;
+}
+
+.app-page {
+  display: none; // Masqué par défaut
+  width: 100%;
+  animation: fadeIn 0.2s ease forwards;
+
+  /* Devient visible via le JS */
+  &.is-visible {
+    display: block;
+  }
+}
+
+/* Structure interne centrée pour Info & Contact */
+.full-page-content {
+  max-width: 900px;
+  margin: 10vh auto 0 auto; // Décale le contenu un peu vers le bas sous le header
+  display: table;
+  width: 100%;
+  padding: 0 2rem;
+
+  .info-media {
+    display: table-cell;
+    vertical-align: middle;
+    width: 300px;
+    padding-right: 4rem;
+
+    .square-image-placeholder {
+      width: 250px;
+      height: 250px;
+      border: 1px solid $border-color;
+      background-color: #111111;
+    }
+
+    img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border: 1px solid $border-color;
+    }
+  }
+
+  .info-text {
+    display: table-cell;
+    vertical-align: middle;
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 500px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      a {
+        color: $text-color;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: -0.02em;
+        width: fit-content;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          text-decoration: underline;
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
+
+/* Effet d'apparition fondu ultra-rapide */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .full-page-content {
+    margin-top: 2rem;
+    display: block;
+
+    .info-media {
+      display: block;
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 2.5rem;
+      text-align: center;
+
+      .square-image-placeholder,
+      img {
+        margin: 0 auto;
+      }
+    }
+
+    .info-text {
+      display: block;
+      text-align: center;
+
+      p {
+        margin: 0 auto;
+      }
+      .contact-links {
+        align-items: center;
+      }
+    }
+  }
+}

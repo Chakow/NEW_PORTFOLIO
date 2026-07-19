@@ -1,0 +1,191 @@
+.index-container {
+  width: 100%;
+  border-top: 1px solid $border-color;
+
+  .index-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 150px 120px;
+    align-items: center;
+    padding: 1.2rem;
+    border-bottom: 1px solid $border-color;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    transition:
+      background-color 0.1s ease,
+      color 0.1s ease;
+
+    .index-id {
+      font-weight: 400;
+      opacity: 0.5;
+    }
+    .index-title {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .index-category {
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+    .index-date {
+      text-align: right;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* HOVER : Inversion totale temporaire au survol */
+    &:not(.header-row):hover {
+      background-color: $text-color;
+      color: $bg-color;
+
+      .index-id,
+      .index-title,
+      .index-category,
+      .index-date {
+        color: $bg-color;
+        opacity: 1;
+      }
+    }
+
+    /* EN-TÊTE DE LA LISTE */
+    &.header-row {
+      font-weight: 900;
+      color: $text-color;
+      opacity: 0.4;
+      border-bottom: 2px solid $border-color;
+      cursor: default;
+    }
+
+    /* ÉTAT ACTIF (Audio en lecture seule) */
+    &.is-active {
+      background-color: $text-color;
+      color: $bg-color;
+
+      .index-id,
+      .index-title,
+      .index-category,
+      .index-date {
+        color: $bg-color;
+        opacity: 1;
+      }
+    }
+  }
+
+  /* ACCORDÉON VIDÉO (BLOC DEVENANT 100% BLANC) */
+  .project-item {
+    border-bottom: 1px solid $border-color;
+    transition: background-color 0.1s ease;
+
+    .index-row {
+      border-bottom: none; // On enlève la bordure pour fusionner avec le tiroir
+    }
+
+    .project-drawer {
+      max-height: 0;
+      overflow: hidden;
+      background-color: transparent; // Suit le fond du parent (.project-item)
+      transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* QUAND LA VIDÉO EST OUVERTE : TOUT LE BLOC PASSE EN BLANC */
+    &.is-active {
+      background-color: $text-color; // Le fond global devient blanc
+
+      .index-row {
+        background-color: $text-color;
+        color: $bg-color;
+
+        .index-id,
+        .index-title,
+        .index-category,
+        .index-date {
+          color: $bg-color;
+          opacity: 1;
+        }
+      }
+
+      /* Séparation interne noire entre le titre et le contenu ouvert */
+      .project-drawer {
+        max-height: 600px;
+        border-top: 1px solid $bg-color; // Ligne noire de séparation nette
+      }
+
+      /* Le texte à l'intérieur passe en noir vu que le fond est blanc */
+      .drawer-content {
+        color: $bg-color;
+
+        .drawer-left p {
+          color: $bg-color;
+          opacity: 0.8;
+        }
+
+        .drawer-right .video-responsive {
+          border: 1px solid $bg-color; // Cadre noir autour de la vidéo
+        }
+      }
+    }
+  }
+
+  /* CONTENU DU TIROIR OUVERT */
+  .drawer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2.5rem 1.2rem;
+    text-transform: none;
+
+    .drawer-left {
+      h3 {
+        text-transform: uppercase;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        letter-spacing: -0.03em;
+      }
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .drawer-right {
+      width: 100%;
+
+      .video-responsive {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+
+        iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+  .index-container {
+    .index-row {
+      grid-template-columns: 40px 1fr 100px;
+      padding: 1rem;
+      font-size: 1rem;
+
+      .index-date {
+        display: none;
+      }
+    }
+    .drawer-content {
+      grid-template-columns: 1fr;
+      padding: 1.5rem;
+      gap: 1.5rem;
+    }
+  }
+}

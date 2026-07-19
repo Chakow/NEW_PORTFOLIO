@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beatmaker Index</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="scss/main.scss" />
+  </head>
+  <body>
+    <header>
+      <h1>NOM_ARTISTE / INDEX</h1>
+      <nav>
+        <a href="#beats">Beats</a>
+        <a href="#about">Infos</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <div id="page-index" class="app-page is-visible">
+        <div class="index-container">
+          <div
+            class="index-row"
+            data-audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+            data-title="PROD_01_NEON_LIGHTS"
+          >
+            <div class="index-id">001</div>
+            <div class="index-title">PROD_01_NEON_LIGHTS</div>
+            <div class="index-category">Musique</div>
+            <div class="index-date">10.06.2026</div>
+          </div>
+
+          <div class="project-item type-video">
+            <div class="index-row">
+              <div class="index-id">002</div>
+              <div class="index-title">CLIP_OFFICIEL_ARTISTE</div>
+              <div class="index-category">Vidéo</div>
+              <div class="index-date">02.05.2026</div>
+            </div>
+
+            <div class="project-drawer">
+              <div class="drawer-content">
+                <div class="drawer-left">
+                  <h3>Description du projet</h3>
+                  <p>
+                    Réalisation du clip vidéo pour le titre éponyme. Entièrement
+                    filmé en lumière naturelle avec une esthétique brute et
+                    expérimentale.
+                  </p>
+                  <p>
+                    <strong>Rôle :</strong> Réalisateur, Monteur, Beatmaker.
+                  </p>
+                </div>
+                <div class="drawer-right">
+                  <div class="video-responsive">
+                    <iframe
+                      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="
+                        accelerometer;
+                        autoplay;
+                        clipboard-write;
+                        encrypted-media;
+                        gyroscope;
+                        picture-in-picture;
+                      "
+                      allowfullscreen
+                    >
+                    </iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="index-row"
+            data-audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+            data-title="PROD_02_BRUTAL_BOUNCE"
+          >
+            <div class="index-id">003</div>
+            <div class="index-title">PROD_02_BRUTAL_BOUNCE</div>
+            <div class="index-category">Musique</div>
+            <div class="index-date">14.04.2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="page-about" class="app-page">
+        <div class="full-page-content">
+          <div class="info-media">
+            <div class="square-image-placeholder"></div>
+          </div>
+          <div class="info-text">
+            <h2>INFO</h2>
+            <p>
+              Beatmaker et réalisateur indépendant basé à Paris. Spécialisé dans
+              les productions brutes, sombres et à fort impact visuel.
+              J'accompagne les artistes de la composition de l'instru jusqu'à la
+              mise en image de leur univers.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="page-contact" class="app-page">
+        <div class="full-page-content">
+          <div class="info-media">
+            <div class="square-image-placeholder"></div>
+          </div>
+          <div class="info-text">
+            <h2>CONTACT</h2>
+            <div class="contact-links">
+              <a href="https://instagram.com/ton_insta" target="_blank"
+                >INSTAGRAM</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="audio-player">
+      <div class="progress-container" id="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+
+      <div class="now-playing">
+        <div class="track-title" id="player-track-title">
+          Aucun morceau sélectionné
+        </div>
+        <div class="status" id="player-status">
+          Sélectionnez une prod ci-dessus
+        </div>
+      </div>
+
+      <div class="player-controls">
+        <audio id="main-audio-element"></audio>
+        <button id="play-pause-btn" class="icon-btn" aria-label="Play/Pause">
+          <svg
+            class="icon-play"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="currentColor"
+          >
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          <svg
+            class="icon-pause"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="currentColor"
+            style="display: none"
+          >
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

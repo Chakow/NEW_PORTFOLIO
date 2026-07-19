@@ -1,0 +1,22 @@
+/* VARIABLES & CONFIG DE BASE (100% NOIR & BLANC) */
+$bg-color: #000000; /* Noir absolu */
+$text-color: #ffffff; /* Blanc pur */
+$border-color: #ffffff; /* Toutes les bordures en blanc */
+$font-stack: "Inter", sans-serif;
+$player-padding-bottom: 5rem; /* Réduit pour coller proprement au player fixe */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: $bg-color;
+  color: $text-color;
+  font-family: $font-stack;
+  padding-bottom: $player-padding-bottom;
+  -webkit-font-smoothing: antialiased;
+}
