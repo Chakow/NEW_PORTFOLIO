@@ -28,18 +28,23 @@
     width: 300px;
     padding-right: 4rem;
 
-    .square-image-placeholder {
+    // Style universel pour tes deux images
+    .info-img {
       width: 250px;
       height: 250px;
+      background-size: cover;
+      background-position: center;
       border: 1px solid $border-color;
-      background-color: #111111;
     }
 
-    img {
-      width: 250px;
-      height: 250px;
-      object-fit: cover;
-      border: 1px solid $border-color;
+    // L'image pour "Moi" (dossier static à la racine du serveur final)
+    .img-moi {
+      background-image: url("/static/img/moi.png");
+    }
+
+    // L'image pour "Contact"
+    .img-contact {
+      background-image: url("/static/img/contact.png");
     }
   }
 
