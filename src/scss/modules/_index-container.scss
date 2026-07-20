@@ -34,9 +34,16 @@
     }
 
     /* HOVER : Inversion totale temporaire au survol */
+    /* Trouve la règle existante &:not(.header-row):hover et ajuste-la : */
     &:not(.header-row):hover {
       background-color: $text-color;
       color: $bg-color;
+
+      // Petit effet d'avancée mécanique en poussant légèrement le texte
+      padding-left: 1.8rem;
+
+      // Transition ultra-rapide et nette (style brut)
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 
       .index-id,
       .index-title,

@@ -206,4 +206,63 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // 5. CURSEUR CUSTOM AVEC INERTIE
+  const cursor = document.querySelector(".custom-cursor");
+
+  if (cursor) {
+    // Variables pour stocker la position de la vraie souris et du point blanc
+    let mouseX = 0,
+      mouseY = 0; // Position de la vraie souris
+    let cursorX = 0,
+      cursorY = 0; // Position du point blanc en retard
+
+    // Vitesse de l'inertie (Plus le chiffre est petit, plus il y a de la latence. Ex: 0.05 = grosse latence, 0.2 = très réactif)
+    const speed = 0.09;
+
+    // Mettre à jour les coordonnées de la vraie souris lors du mouvement
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    // Boucle d'animation fluide pour calculer l'amorti
+    const animateCursor = () => {
+      // Formule mathématique d'amorti (Linear Interpolation)
+      cursorX += (mouseX - cursorX) * speed;
+      cursorY += (mouseY - cursorY) * speed;
+
+      // On applique la position calculée
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+
+      // On redemande au navigateur de relancer la fonction au prochain pixel affiché
+      requestAnimationFrame(animateCursor);
+    };
+
+    // On lance la boucle d'inertie
+    animateCursor();
+
+    // Gestion du grossissement au survol des éléments cliquables
+    const refreshHoverListeners = () => {
+      const clickables = document.querySelectorAll(
+        "a, button, .index-row, .progress-container",
+      );
+      clickables.forEach((el) => {
+        el.addEventListener("mouseenter", () =>
+          cursor.classList.add("is-hovered"),
+        );
+        el.addEventListener("mouseleave", () =>
+          cursor.classList.remove("is-hovered"),
+        );
+      });
+    };
+
+    refreshHoverListeners();
+    navLinks.forEach((link) =>
+      link.addEventListener("click", () =>
+        setTimeout(refreshHoverListeners, 100),
+      ),
+    );
+  }
 });
