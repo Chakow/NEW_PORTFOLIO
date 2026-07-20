@@ -26,6 +26,9 @@ $player-padding-bottom: 5rem; /* Réduit pour coller proprement au player fixe *
   &.is-hovered {
     transform: translate3d(-50%, -50%, 0) scale(2.2);
   }
+  @media (pointer: coarse) {
+    display: none !important;
+  }
 }
 
 * {

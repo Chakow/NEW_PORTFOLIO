@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 4. GESTION DU CHANGEMENT DE PAGE (BEATS / INFO / CONTACT)
-  const navLinks = document.querySelectorAll("header nav a");
+  const navLinks = document.querySelectorAll("header nav a, .logo-text-link");
   const pages = document.querySelectorAll(".app-page");
 
   navLinks.forEach((link) => {
@@ -265,4 +265,53 @@ document.addEventListener("DOMContentLoaded", () => {
       ),
     );
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  // On cible directement l'élément qui contient le texte du titre
+  const projectTitles = document.querySelectorAll(".index-row .index-title");
+
+  // Caractères bruts pour l'effet Matrix/Glitch
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?@#$-_+=";
+
+  projectTitles.forEach((titleElement) => {
+    // On stocke le vrai nom d'origine écrit dans le HTML
+    const originalText = titleElement.innerText;
+    let isShuffling = false;
+
+    // On écoute le survol sur la ligne parente (.index-row) pour que ce soit plus réactif
+    const parentRow = titleElement.closest(".index-row");
+
+    if (parentRow) {
+      parentRow.addEventListener("mouseenter", () => {
+        if (isShuffling) return;
+
+        isShuffling = true;
+        let iteration = 0;
+
+        const interval = setInterval(() => {
+          titleElement.innerText = originalText
+            .split("")
+            .map((letter, index) => {
+              if (letter === " " || letter === "_") return letter; // On garde les espaces et les underscores intacts
+
+              if (index < iteration) {
+                return originalText[index];
+              }
+              return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+
+          if (iteration >= originalText.length) {
+            clearInterval(interval);
+            titleElement.innerText = originalText; // Sécurité réécriture propre
+            isShuffling = false;
+          }
+
+          iteration += 1; // Vitesse de décodage
+        }, 30);
+      });
+    }
+  });
 });
