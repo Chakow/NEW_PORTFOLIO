@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("=== SCRIPT INITIALISÉ AVEC SUCCÈS ===");
 
-  // Sélection des éléments
+  // --- SÉLECTEURS ---
   const audioRows = document.querySelectorAll(".index-row[data-audio]");
   const videoItems = document.querySelectorAll(".project-item.type-video");
   const audioElement = document.getElementById("main-audio-element");
@@ -10,13 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const playerStatus = document.getElementById("player-status");
   const progressBar = document.getElementById("progress-bar");
   const progressContainer = document.getElementById("progress-container");
-
-  if (playPauseBtn) playPauseBtn.style.display = "flex";
+  const navLinks = document.querySelectorAll("header nav a, .logo-text-link");
+  const pages = document.querySelectorAll(".app-page");
+  const cursor = document.querySelector(".custom-cursor");
 
   let currentActiveAudioRow = null;
   let currentActiveVideoItem = null;
 
-  // 1. GESTION DU CLIC AUDIO (100% AUTOMATIQUE)
+  if (playPauseBtn) playPauseBtn.style.display = "flex";
+
+  // --- 1. LECTEUR AUDIO ---
   audioRows.forEach((row) => {
     row.addEventListener("click", () => {
       const audioUrl = row.getAttribute("data-audio");
@@ -36,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
       row.classList.add("is-active");
       currentActiveAudioRow = row;
 
-      // Grâce au plugin static copy, l'URL relative fonctionne directement !
       audioElement.src = audioUrl;
       audioElement.load();
 
@@ -58,47 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 2. GESTION ACCORDÉON VIDÉO
-  videoItems.forEach((item) => {
-    const rowClickable = item.querySelector(".index-row");
-    if (!rowClickable) return;
-
-    rowClickable.addEventListener("click", () => {
-      if (currentActiveVideoItem === item) {
-        closeActiveVideo();
-        return;
-      }
-
-      // Stopper la musique si une vidéo est lancée
-      if (!audioElement.paused) {
-        audioElement.pause();
-        updateButtonUI(false);
-        playerStatus.textContent = "En pause";
-        if (currentActiveAudioRow) {
-          currentActiveAudioRow.classList.remove("is-active");
-          currentActiveAudioRow = null;
-        }
-      }
-
-      closeActiveVideo();
-      item.classList.add("is-active");
-      currentActiveVideoItem = item;
-    });
-  });
-
-  function closeActiveVideo() {
-    if (currentActiveVideoItem) {
-      currentActiveVideoItem.classList.remove("is-active");
-      const iframe = currentActiveVideoItem.querySelector("iframe");
-      if (iframe) {
-        const src = iframe.src;
-        iframe.src = src; // Reset pour couper la lecture YouTube
-      }
-      currentActiveVideoItem = null;
-    }
-  }
-
-  // 3. CONTRÔLES DU LECTEUR
   if (playPauseBtn) playPauseBtn.addEventListener("click", toggleAudio);
 
   function toggleAudio() {
@@ -128,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // BARRE DE PROGRESSION
+  // Barre de progression
   audioElement.addEventListener("timeupdate", () => {
     if (audioElement.duration && progressBar) {
       const progressPercent =
@@ -159,10 +120,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 4. NAVIGATION
-  const navLinks = document.querySelectorAll("header nav a, .logo-text-link");
-  const pages = document.querySelectorAll(".app-page");
+  // --- 2. ACCORDÉON VIDÉO ---
+  videoItems.forEach((item) => {
+    const rowClickable = item.querySelector(".index-row");
+    if (!rowClickable) return;
 
+    rowClickable.addEventListener("click", () => {
+      if (currentActiveVideoItem === item) {
+        closeActiveVideo();
+        return;
+      }
+
+      if (!audioElement.paused) {
+        audioElement.pause();
+        updateButtonUI(false);
+        playerStatus.textContent = "En pause";
+        if (currentActiveAudioRow) {
+          currentActiveAudioRow.classList.remove("is-active");
+          currentActiveAudioRow = null;
+        }
+      }
+
+      closeActiveVideo();
+      item.classList.add("is-active");
+      currentActiveVideoItem = item;
+    });
+  });
+
+  function closeActiveVideo() {
+    if (currentActiveVideoItem) {
+      currentActiveVideoItem.classList.remove("is-active");
+      const iframe = currentActiveVideoItem.querySelector("iframe");
+      if (iframe) {
+        const src = iframe.src;
+        iframe.src = src; // Reset iframe pour couper le son Youtube
+      }
+      currentActiveVideoItem = null;
+    }
+  }
+
+  // --- 3. NAVIGATION PAR ONGLETS ---
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       const targetId = link.getAttribute("href");
@@ -184,8 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 5. CURSEUR CUSTOM AVEC INERTIE
-  const cursor = document.querySelector(".custom-cursor");
+  // --- 4. CURSEUR SUIVEUR (POINT AVEC INERTIE) ---
   if (cursor) {
     let mouseX = 0,
       mouseY = 0;
@@ -229,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // 6. EFFET TEXT GLITCH / MATRIX
+  // --- 5. EFFET TEXT GLITCH / MATRIX ---
   const projectTitles = document.querySelectorAll(".index-row .index-title");
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?@#$-_+=";

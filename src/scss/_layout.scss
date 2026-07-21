@@ -5,7 +5,6 @@ header {
   border-bottom: 1px solid $text-color;
   padding: 1.5rem;
 
-  /* --- LE STYLE DU TEXTE EN GROS --- */
   .logo-text-link {
     font-size: 2rem;
     font-weight: 900;
@@ -14,8 +13,8 @@ header {
     color: $text-color;
     text-decoration: none;
     line-height: 1;
-    cursor: none !important; // On garde ça pour que le curseur custom grossisse quand même dessus !
   }
+
   nav {
     a {
       color: $text-color;
@@ -27,7 +26,7 @@ header {
       transition: opacity 0.2s ease;
 
       &:hover {
-        text-decoration: underline; /* Souligné brut au survol */
+        text-decoration: underline;
         opacity: 0.7;
       }
     }

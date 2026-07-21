@@ -1,48 +1,80 @@
-/* VARIABLES & CONFIG DE BASE (100% NOIR & BLANC) */
-$bg-color: #000000; /* Noir absolu */
-$text-color: #ffffff; /* Blanc pur */
-$border-color: #ffffff; /* Toutes les bordures en blanc */
-$font-stack: "Inter", sans-serif;
-$player-padding-bottom: 5rem; /* Réduit pour coller proprement au player fixe */
+/* VARIABLES GLOBALES */
+$font-main: "Inter", sans-serif !default;
+$bg-color: #000000 !default;
+$text-color: #ffffff !default;
+$border-color: #ffffff !default;
 
-///CURSOR
-/* Le curseur custom */
+/* RESET CSS */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: $font-main;
+  background-color: $bg-color;
+  color: $text-color;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+
+  /* FOND LOGO XXL EN TRANSPARENCE */
+  &::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90vw;
+    height: 90vh;
+    transform: translate(-50%, -50%);
+    background-image: url("/static/img/logo-bg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    /* 1. Inverse le SVG noir pour le rendre blanc */
+    filter: invert(1);
+
+    /* 2. Régle l'opacité pour doser la discrétion de la texture */
+    opacity: 0.06;
+
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* Superposition de contenu */
+header,
+.main-content,
+.audio-player {
+  position: relative;
+  z-index: 1;
+}
+
+/* CURSEUR POINT CUSTOM (Compléte la flèche système) */
 .custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 12px; // Un poil plus petit pour faire un "point" suiveur stylé
+  width: 12px;
   height: 12px;
   background-color: #ffffff;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: difference;
-
-  // On retire la transition sur "top" et "left" pour laisser le JS gérer l'inertie.
-  // On garde une transition uniquement sur le "scale" pour le grossissement.
-  transform: translate3d(-50%, -50%, 0) scale(1);
+  transform: translate(-50%, -50%) scale(1);
   transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-  &.is-hovered {
-    transform: translate3d(-50%, -50%, 0) scale(2.2);
-  }
-  @media (pointer: coarse) {
-    display: none !important;
-  }
-}
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-}
-body {
-  background-color: $bg-color;
-  color: $text-color;
-  font-family: $font-stack;
-  padding-bottom: $player-padding-bottom;
-  -webkit-font-smoothing: antialiased;
+  &.is-hovered {
+    transform: translate(-50%, -50%) scale(3.5);
+    background-color: rgba(255, 255, 255, 0.8);
+    mix-blend-mode: difference;
+  }
 }

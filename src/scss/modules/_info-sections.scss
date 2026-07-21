@@ -1,23 +1,20 @@
-/* GESTION DES PAGES INDÉPENDANTES */
 .main-content {
   width: 100%;
 }
 
 .app-page {
-  display: none; // Masqué par défaut
+  display: none;
   width: 100%;
   animation: fadeIn 0.2s ease forwards;
 
-  /* Devient visible via le JS */
   &.is-visible {
     display: block;
   }
 }
 
-/* Structure interne centrée pour Info & Contact */
 .full-page-content {
   max-width: 900px;
-  margin: 10vh auto 0 auto; // Décale le contenu un peu vers le bas sous le header
+  margin: 10vh auto 0 auto;
   display: table;
   width: 100%;
   padding: 0 2rem;
@@ -28,7 +25,6 @@
     width: 300px;
     padding-right: 4rem;
 
-    // Style universel pour tes deux images
     .info-img {
       width: 250px;
       height: 250px;
@@ -37,12 +33,10 @@
       border: 1px solid $border-color;
     }
 
-    // L'image pour "Moi" (dossier static à la racine du serveur final)
     .img-moi {
       background-image: url("/static/img/moi.png");
     }
 
-    // L'image pour "Contact"
     .img-contact {
       background-image: url("/static/img/contact.png");
     }
@@ -89,15 +83,10 @@
   }
 }
 
-/* Effet d'apparition fondu ultra-rapide */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translate3d(
-      0,
-      15px,
-      0
-    ); // Utilise la 3D pour forcer la fluidité matérielle
+    transform: translate3d(0, 15px, 0);
   }
   to {
     opacity: 1;
@@ -105,7 +94,6 @@
   }
 }
 
-/* Mobile responsive */
 @media (max-width: 768px) {
   .full-page-content {
     margin-top: 2rem;
@@ -118,8 +106,7 @@
       margin-bottom: 2.5rem;
       text-align: center;
 
-      .square-image-placeholder,
-      img {
+      .info-img {
         margin: 0 auto;
       }
     }
