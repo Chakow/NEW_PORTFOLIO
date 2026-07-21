@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const playerStatus = document.getElementById("player-status");
   const progressBar = document.getElementById("progress-bar");
   const progressContainer = document.getElementById("progress-container");
+  const volumeSlider = document.getElementById("volume-slider");
   const navLinks = document.querySelectorAll("header nav a, .logo-text-link");
   const pages = document.querySelectorAll(".app-page");
   const cursor = document.querySelector(".custom-cursor");
@@ -18,6 +19,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentActiveVideoItem = null;
 
   if (playPauseBtn) playPauseBtn.style.display = "flex";
+
+  // Init volume par défaut à 80%
+  if (audioElement && volumeSlider) {
+    audioElement.volume = volumeSlider.value;
+
+    volumeSlider.addEventListener("input", (e) => {
+      audioElement.volume = e.target.value;
+    });
+  }
 
   // --- 1. LECTEUR AUDIO ---
   audioRows.forEach((row) => {
@@ -181,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- 4. CURSEUR SUIVEUR (POINT AVEC INERTIE) ---
+  // --- 4. CURSEUR SUIVEUR ---
   if (cursor) {
     let mouseX = 0,
       mouseY = 0;
@@ -205,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const refreshHoverListeners = () => {
       const clickables = document.querySelectorAll(
-        "a, button, .index-row, .progress-container",
+        "a, button, .index-row, .progress-container, input[type='range']",
       );
       clickables.forEach((el) => {
         el.addEventListener("mouseenter", () =>

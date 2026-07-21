@@ -78,3 +78,14 @@ header,
     mix-blend-mode: difference;
   }
 }
+
+#point-cloud-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Laisse cliquer à travers */
+  z-index: 0; /* En dessous du contenu */
+  opacity: 0.4; /* Ajuste l'intensité de la texture */
+}
